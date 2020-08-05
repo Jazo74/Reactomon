@@ -1,14 +1,8 @@
 import React from 'react';
 
-export class Home extends React.Component{
-    render(){
-        return <h1>Home</h1>;
-    }   
-}
-
 export class PokemonList extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             firstState: "elso state",
             //secondState: this.props.name
@@ -21,18 +15,17 @@ export class PokemonList extends React.Component{
     render(){
         return (
         <>
+            <hr></hr>
             <h1>Pokemons {this.props.name} - {this.state.firstState}</h1>
-
+            <hr></hr>
             <input type="text" ref="inputA"></input>
-            
+            <hr></hr>
             <button onClick={this.update.bind(this)}>Ok</button>
             <p>{this.state.firstState}</p>
         </>
         )
     }   
 }
-
-
 
 export class TypeList extends React.Component{
     render(){
