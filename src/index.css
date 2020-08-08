@@ -4,6 +4,8 @@ h1 {
 
 body {
   font-size: 18px;
+  padding: 0;
+  margin: 0;
 }
 
 ul {
@@ -14,4 +16,9 @@ ul {
 li {
   float: left;
   padding: 15px;
+  font-size: 20px;
+}
+
+a {
+  font-size: 22px;
 }

@@ -11,7 +11,7 @@ import PokemonList from './PokemonList';
 import PokemonList2 from './PokemonList2';
 import TypeList from './TypeList';
 import PokemonDetail from './PokemonDetail';
-import {ThemeProvider, createGlobalStyle} from 'styled-components';
+import Styled, {ThemeProvider, createGlobalStyle} from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -48,22 +48,22 @@ body {
       let color = '';
       switch(props.theme.mode) {
         case 'red':
-          color = '#ff9b9b';
+          color = '#ffe5e5';
           break;
         case 'orange':
-          color = '#f8d8a0';
+          color = '#fdf5e8';
           break;
         case 'yellow':
-          color = '#f7f8a0';
+          color = '#fdffdf';
           break;
         case 'green':
-          color = '#c3f8a0';
+          color = '#f1ffe6';
           break;
         case 'blue':
-          color = '#a0a4f8';
+          color = '#eef3ff';
           break;
         case 'black':
-          color = '#a6a6a6';
+          color = '#eaeaea';
           break;
         default:
           color = '#111';
@@ -72,8 +72,45 @@ body {
       return color;
     }};
 }
+.innerGrid div{
+  background-color: ${props =>
+    { 
+      let color = '';
+      switch(props.theme.mode) {
+        case 'red':
+          color = '#ffafaf';
+          break;
+        case 'orange':
+          color = '#ffdba5';
+          break;
+        case 'yellow':
+          color = '#fffc94';
+          break;
+        case 'green':
+          color = '#b4ff95';
+          break;
+        case 'blue':
+          color = '#86abff';
+          break;
+        case 'black':
+          color = '#7f7e7e';
+          break;
+        default:
+          color = '#111';
+          break;
+      }
+      return color;
+    }};
+  }
 `;
 
+const OuterGrid = Styled.div `
+  display: grid;
+  grid-template-columns: 1FR 1FR 1FR 1FR 1FR 1FR;
+  grid-template-rows: auto;
+  grid-gap: 40px;
+  padding: 40px;
+`;
 
 export class MyApp extends React.Component{
   constructor(props) {
@@ -88,7 +125,6 @@ export class MyApp extends React.Component{
   
   limitChange(e) {
     this.setState({limit: e.target.value});
-    console.log(this.state.limit)
   }
 
   themeChange(e) {
@@ -135,11 +171,15 @@ export class MyApp extends React.Component{
         <Switch>
           <Redirect exact from="/" to="/pokemons" />
           <Route exact path="/pokemons">
+            <OuterGrid>
             <PokemonList limit={this.state.limit}/>
+            </OuterGrid>
           </Route>
 
           <Route exact path="/pokemons2">
+            <OuterGrid>
             <PokemonList2 limit={this.state.limit}/>
+            </OuterGrid>
           </Route>
 
           <Route path="/types">

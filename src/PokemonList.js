@@ -1,7 +1,14 @@
 import React from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
+import Styled from 'styled-components';
 
+const InnerGrid = Styled.div`
+    height: 220px;
+    font-size: 24px;
+    text-align: center;
+    padding-top: 20px;
+`;
 
 class PokemonList extends React.Component{
     constructor(props){
@@ -11,9 +18,8 @@ class PokemonList extends React.Component{
             url: "https://pokeapi.co/api/v2/pokemon?limit=" + this.props.limit
         }
     }
-    
+     
     componentDidMount(){
-        console.log(this.state.url)
         Axios.get(this.state.url)
             .then((response) => {
                 this.setState({pokemons: response.data.results})
@@ -28,24 +34,23 @@ class PokemonList extends React.Component{
         index = '/pokemons/' + index;
         
         return(
-            <li key={pokemon.url}>
-                <p></p>
-                <Link to={index}>
-                    {pokemon.name}
-                </Link>
-            </li>
+            <InnerGrid>
+                <div key={pokemon.url}>
+                    <Link to={index}>
+                        {pokemon.name}
+                    </Link>
+                </div>
+            </InnerGrid>
         )
     }
 
     render(){
+        //console.log(this.state.url)
         return (
             <>
-                <h1>PokemonList</h1>
-                <ul>
                 {
                 this.state.pokemons.map(this.pokemonData)
                 }
-                </ul>
             </>
         );
     }   

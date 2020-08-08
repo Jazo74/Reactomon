@@ -1,16 +1,27 @@
 import React from 'react';
 import Axios from 'axios';
+import Styled from 'styled-components';
+
+const InnerGrid = Styled.div`
+    height: 250px;
+    font-size: 24px;
+    text-align: center;
+    padding-top: 10px;
+    background-color: grey;
+    border-radius: 10px;
+`;
 
 class PokemonList2 extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            pokemons: []
+            pokemons: [],
+            url: "https://pokeapi.co/api/v2/pokemon?limit=" + this.props.limit
         }
     }
 
     componentDidMount(){
-        Axios.get("https://pokeapi.co/api/v2/pokemon?limit=30")
+        Axios.get(this.state.url)
             .then((response) => {
                 Axios.all(response.data.results.map(item => {
                     return Axios.get(item.url)
@@ -37,24 +48,24 @@ class PokemonList2 extends React.Component{
     
     pokemonData(pokemon) {
         return(
-            <li key={pokemon.name}>
-                <p>Name: {pokemon.name}</p>
-                <p>Type: {pokemon.type}</p>
-                <img src={pokemon.image} alt={pokemon.name}></img>
-                <hr></hr>
-            </li>
+            <>
+                <InnerGrid>
+                    <div className="innerGrid" key={pokemon.url}>
+                    <p>{pokemon.name.toUpperCase()}</p>
+                    <p>Type: {pokemon.type}</p>
+                    <img src={pokemon.image} alt={pokemon.name}></img>
+                    </div>
+                </InnerGrid>
+            </>
         )
     }
 
     render(){
         return (
             <>
-                <h1>PokemonList 2</h1>
-                <ul>
                 {
                 this.state.pokemons.map(this.pokemonData)
                 }
-                </ul>
             </>
         );
     }   

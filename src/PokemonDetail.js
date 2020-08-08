@@ -30,14 +30,13 @@ class PokemonDetail extends React.Component{
     
     render(){
         return (
-            <>
+            <div>
                 <h1>Detail</h1>
                 <p>Name: {this.state.pokemonData.name}</p>
                 <p>Id: {this.state.pokemonData.id}</p>
                 <p>Type 1: {this.state.pokemonData.type1}</p>
                 <img src={this.state.pokemonData.image} alt={this.state.pokemonData.name}></img>
-
-            </>
+            </div>
         );
     }   
 }
